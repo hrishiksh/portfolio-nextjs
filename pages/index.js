@@ -1,65 +1,135 @@
-import Head from 'next/head'
-import styles from '../styles/Home.module.css'
+import Head from "next/head";
+import Primary_btn from "../components/Primary_btn";
+import SkillCard from "../components/Skill_card";
+import ProjectCard from "../components/Project_card";
+import WhiteBtn from "../components/White_btn";
+import styles from "../styles/page/Home.module.scss";
 
-export default function Home() {
+const HomePage = () => {
   return (
-    <div className={styles.container}>
+    <div>
       <Head>
-        <title>Create Next App</title>
-        <link rel="icon" href="/favicon.ico" />
+        <title>Hrishikesh Pathak</title>
+        <link
+          href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap"
+          rel="stylesheet"
+        ></link>
       </Head>
+      <header>
+        <nav className={styles.nav}>
+          <ul className={styles.nav__list}>
+            <li className={styles.nav__item}>
+              <a href="#skill">Skills</a>
+            </li>
+            <li className={styles.nav__item}>Project</li>
+            <li className={styles.nav__item}>Open Source</li>
+            <Primary_btn>Contact</Primary_btn>
+          </ul>
+        </nav>
+      </header>
+
+      {/* main section starts here. it contains HomePage body */}
 
       <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
+        <section className={styles.main__hero}>
+          <div className={styles.main__textbox}>
+            <h1 className={styles.main__textbox__text}>
+              I AM{" "}
+              <span className={styles.main__textbox__bold}>
+                Hrishikesh Pathak
+              </span>
+            </h1>
+            <h2 className={styles.main__textbox__text}>
+              Web and app developer
+            </h2>
+          </div>
+          <div className={styles.main__imgbox}>
+            <img
+              className={styles.main__imgbox__img}
+              src="/profile_img.jpg"
+              alt="Image of Hrishikesh Pathak"
+            />
+          </div>
+          <div className={styles.main__iconbox}>
+            <svg className={styles.main__iconbox__icon}>
+              <use xlinkHref="/sprite.svg#icon-github"></use>
+            </svg>
+            <svg className={styles.main__iconbox__icon}>
+              <use xlinkHref="/sprite.svg#icon-linkedin"></use>
+            </svg>
+            <svg className={styles.main__iconbox__icon}>
+              <use xlinkHref="/sprite.svg#icon-twitter"></use>
+            </svg>
+          </div>
+        </section>
 
-        <p className={styles.description}>
-          Get started by editing{' '}
-          <code className={styles.code}>pages/index.js</code>
-        </p>
+        {/* this is skill section */}
 
-        <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" className={styles.card}>
-            <h3>Documentation &rarr;</h3>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
+        <section className={styles.main__skills} id="skill">
+          <h2 className={styles.main__skills__title}>Technology & Skills</h2>
+          <h3 className={styles.main__skills__subtitle}>
+            Confidence without skill is just emptiness
+          </h3>
+          <div className={styles.main__skills__box}>
+            <SkillCard icon="/sprite.svg#icon-flutter" title="Flutter" />
+            <SkillCard icon="/sprite.svg#icon-react" title="React" />
+            <SkillCard icon="/sprite.svg#icon-node-dot-js" title="Nodejs" />
+            <SkillCard icon="/sprite.svg#icon-mongodb" title="MongoDb" />
+            <SkillCard icon="/sprite.svg#icon-docker" title="Docker" />
+          </div>
+        </section>
 
-          <a href="https://nextjs.org/learn" className={styles.card}>
-            <h3>Learn &rarr;</h3>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
+        {/* This is Project section. it contain all the projects*/}
 
-          <a
-            href="https://github.com/vercel/next.js/tree/master/examples"
-            className={styles.card}
-          >
-            <h3>Examples &rarr;</h3>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
+        <section className={styles.main__projects}>
+          <h2 className={styles.main__projects__title}>Projects</h2>
+          <h3 className={styles.main__projects__subtitle}>
+            Checkout my noteworthy projects
+          </h3>
+          <div className={styles.main__projects__items}>
+            <ProjectCard
+              img="/rideapp.jpg"
+              alt="rideapp is one of my project"
+              title="RideApp"
+              subtitle="App that can measure your travel distance and speed and give insights"
+            />
+            <ProjectCard
+              img="/rideapp.jpg"
+              alt="rideapp is one of my project"
+              title="Expentic"
+              subtitle="A cross platform app that revolutionize persional finance"
+            />
+          </div>
+        </section>
 
-          <a
-            href="https://vercel.com/import?filter=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-          >
-            <h3>Deploy &rarr;</h3>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
-        </div>
+        {/* This will be contact section */}
+
+        <section className={styles.main__contact}>
+          <h2 className={styles.main__contact__title}>Contact</h2>
+          <h3 className={styles.main__contact__subtitle}>
+            For quick connect, Drop a mail
+          </h3>
+          <div className={styles.main__contact__socialbox}>
+            <svg className={styles.main__contact__socialbox__icon}>
+              <use xlinkHref="/sprite.svg#icon-github"></use>
+            </svg>
+            <svg className={styles.main__contact__socialbox__icon}>
+              <use xlinkHref="/sprite.svg#icon-linkedin"></use>
+            </svg>
+            <svg className={styles.main__contact__socialbox__icon}>
+              <use xlinkHref="/sprite.svg#icon-twitter"></use>
+            </svg>
+          </div>
+          <div className={styles.main__contact__or}>
+            <p className={styles.main__contact__or__text}>or</p>
+          </div>
+          <div className={styles.main__contact__cta}>
+            <WhiteBtn>Drop a Mail</WhiteBtn>
+          </div>
+        </section>
       </main>
-
-      <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <img src="/vercel.svg" alt="Vercel Logo" className={styles.logo} />
-        </a>
-      </footer>
     </div>
-  )
-}
+  );
+};
+
+export default HomePage;
