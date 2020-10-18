@@ -21,9 +21,13 @@ const HomePage = () => {
             <li className={styles.nav__item}>
               <a href="#skill">Skills</a>
             </li>
-            <li className={styles.nav__item}>Project</li>
+            <li className={styles.nav__item}>
+              <a href="#project">Project</a>
+            </li>
             <li className={styles.nav__item}>Open Source</li>
-            <Primary_btn>Contact</Primary_btn>
+            <Primary_btn>
+              <a href="#contact">Contact</a>
+            </Primary_btn>
           </ul>
         </nav>
       </header>
@@ -81,7 +85,7 @@ const HomePage = () => {
 
         {/* This is Project section. it contain all the projects*/}
 
-        <section className={styles.main__projects}>
+        <section className={styles.main__projects} id="project">
           <h2 className={styles.main__projects__title}>Projects</h2>
           <h3 className={styles.main__projects__subtitle}>
             Checkout my noteworthy projects
@@ -104,7 +108,7 @@ const HomePage = () => {
 
         {/* This will be contact section */}
 
-        <section className={styles.main__contact}>
+        <section className={styles.main__contact} id="contact">
           <h2 className={styles.main__contact__title}>Contact</h2>
           <h3 className={styles.main__contact__subtitle}>
             For quick connect, Drop a mail
@@ -124,7 +128,9 @@ const HomePage = () => {
             <p className={styles.main__contact__or__text}>or</p>
           </div>
           <div className={styles.main__contact__cta}>
-            <WhiteBtn>Drop a Mail</WhiteBtn>
+            <WhiteBtn>
+              <a href="mailto:hrishikeshb2pathak@gmail.com">Drop a Mail</a>
+            </WhiteBtn>
           </div>
         </section>
       </main>
