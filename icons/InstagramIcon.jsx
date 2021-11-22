@@ -1,13 +1,16 @@
+import useDarkTheme from "../hooks/usedarkTheme";
+
 const InstagramIcon = () => {
+  let isItDark = useDarkTheme();
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      className="m-2"
+      className="m-2 dark:text-gray-200"
       width="30"
       height="30"
       viewBox="0 0 24 24"
       strokeWidth="1.5"
-      stroke="#2c3e50"
+      stroke={isItDark ? "#F5F5F5" : "#2c3e50"}
       fill="none"
       strokeLinecap="round"
       strokeLinejoin="round"

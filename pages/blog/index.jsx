@@ -47,22 +47,24 @@ const Blog = ({ posts }) => {
           rel="stylesheet"
         />
       </Head>
-
-      <main className="mx-4 sm:max-w-screen-lg sm:w-full  sm:m-auto sm:my-12 sm:grid sm:grid-cols-2 sm:gap-12">
-        {posts.map((article) => (
-          <Link href={`/blog/${article.Slug}`} key={article.Title}>
-            <a>
-              <BlogTile
-                description={article.Description}
-                title={article.Title}
-                author={article.authors[0].Name}
-                authorImg={article.authors[0].Image.formats.thumbnail.url}
-              />
-            </a>
-          </Link>
-        ))}
-      </main>
-      <footer></footer>
+      <div className="max-w-screen-sm mx-auto my-8">
+        <Nav />
+        <main className="mx-4 sm:max-w-screen-lg sm:w-full  sm:m-auto sm:my-12 sm:grid sm:grid-cols-2 sm:gap-12">
+          {posts.map((article) => (
+            <Link href={`/blog/${article.Slug}`} key={article.Title}>
+              <a>
+                <BlogTile
+                  description={article.Description}
+                  title={article.Title}
+                  author={article.authors[0].Name}
+                  authorImg={article.authors[0].Image.formats.thumbnail.url}
+                />
+              </a>
+            </Link>
+          ))}
+        </main>
+        <footer></footer>
+      </div>
     </>
   );
 };

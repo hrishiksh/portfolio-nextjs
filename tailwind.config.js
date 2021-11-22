@@ -1,3 +1,5 @@
+const colors = require("tailwindcss/colors");
+
 module.exports = {
   mode: "jit",
   purge: [
@@ -6,7 +8,7 @@ module.exports = {
     "./icons/**/*.{js,jsx,ts,tsx,vue}",
     "./components/**/*.{js,jsx,ts,tsx,vue}",
   ],
-  darkMode: false, // or 'media' or 'class'
+  darkMode: "media", // or 'media' or 'class'
   theme: {
     extend: {
       fontFamily: {
@@ -18,6 +20,7 @@ module.exports = {
         "custom-green": "#0EAD69",
         "custom-yellow": "#FFD23F",
         "custom-pink": "#EE4266",
+        gray: colors.trueGray,
       },
     },
   },
