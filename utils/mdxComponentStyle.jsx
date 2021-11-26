@@ -16,25 +16,25 @@ export const components = {
   ),
   p: (props) => (
     <p
-      className="font-inter font-normal leading-loose text-xl  py-4 text-gray-800 sm:text-xl sm:text-gray-700 sm:leading-loose dark:text-white"
+      className="font-inter font-normal leading-loose text-xl  py-4 text-gray-800 dark:text-white"
       {...props}
     />
   ),
   a: (props) => (
     <a
-      className="font-merriweather font-normal leading-loose text-sm   sm:text-lg sm:leading-loose text-blue-400"
+      className="font-inter font-normal leading-loose text-xl text-blue-400"
       {...props}
     />
   ),
   em: (props) => (
     <em
-      className="font-sriracha not-italic  font-normal leading-loose text-sm px-1 sm:text-xl sm:leading-loose text-pink-500"
+      className="font-sriracha not-italic font-normal leading-loose text-xl px-1 text-pink-500"
       {...props}
     />
   ),
   code: (props) => (
     <code
-      className="bg-gray-100 px-2 py-1 text-sm sm:text-lg font-inconsolata rounded dark:bg-gray-700"
+      className="bg-gray-200 px-2 py-1 text-lg font-inconsolata rounded dark:bg-gray-600"
       {...props}
     />
   ),
@@ -54,7 +54,7 @@ export const components = {
   ),
   li: (props) => (
     <li
-      className="font-merriweather font-normal text-sm sm:text-lg leading-loose sm:leading-loose dark:text-white py-4"
+      className="font-inter font-normal text-xl leading-loose dark:text-white py-4"
       {...props}
     />
   ),

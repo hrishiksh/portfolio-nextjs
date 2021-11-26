@@ -1,45 +1,10 @@
-import { useContext } from "react";
 import Head from "next/head";
-import Link from "next/link";
 import Chips from "../../components/Chips";
-import IconBtn from "../../components/IconBtn";
-import { GetStaticPaths, GetStaticProps } from "next";
 import { components } from "../../utils/mdxComponentStyle";
 import { NextSeo } from "next-seo";
 import gfm from "remark-gfm";
 import ReactMarkdown from "react-markdown";
-
-// type JsonResponse = [
-//   {
-//     Slug: string;
-//     SocialTitle: string;
-//     SocialDescription: string;
-//     Title: string;
-//     Content: string;
-//     SeoTitle: string;
-//     Description: string;
-//     SeoDescription: string;
-//     published_at: string;
-//     updatedAt: string;
-//     Banner: {
-//       alternativeText: string;
-//       url: string;
-//       formats: { thumbnail: { url: string } };
-//     };
-//     authors: [
-//       {
-//         Name: string;
-//         Description: string;
-//         Image: {
-//           alternativeText: string;
-//           url: string;
-//           formats: { thumbnail: { url: string } };
-//         };
-//       }
-//     ];
-//     categories: [{ CategoryName: string }];
-//   }
-// ];
+import Nav from "../../components/nav";
 
 const BlogPost = ({ parsedResponse }) => {
   return (
@@ -87,13 +52,13 @@ const BlogPost = ({ parsedResponse }) => {
           crossOrigin="true"
         />
         <link
-          href="https://fonts.googleapis.com/css2?family=Inconsolata&family=Inter&family=Sriracha&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Inconsolata&family=Inter:wght@400;500;600;700&family=Sriracha&display=swap"
           rel="stylesheet"
         />
       </Head>
-      <header className="m-4 sm:max-w-3xl sm:w-full sm:m-auto sm:mt-8 flex justify-between"></header>
-      <main className="m-4 sm:max-w-3xl sm:w-full sm:mx-auto sm:m-8">
-        <h1 className="font-ptSans font-bold text-3xl sm:text-4xl py-6 dark:text-white">
+      <Nav width="max-w-screen-md mx-auto mt-4" />
+      <main className="max-w-screen-md mx-auto my-8">
+        <h1 className="font-inter font-bold text-3xl sm:text-4xl py-6 dark:text-white">
           {parsedResponse[0].Title}
         </h1>
         <div className="flex mb-8 w-full">
@@ -101,6 +66,11 @@ const BlogPost = ({ parsedResponse }) => {
             <Chips key={value.CategoryName} title={value.CategoryName} />
           ))}
         </div>
+        <img
+          className="pb-4"
+          src={parsedResponse[0].Banner.url}
+          alt={parsedResponse[0].Banner.alternativeText}
+        />
         <ReactMarkdown
           children={parsedResponse[0].Content}
           remarkPlugins={[gfm]}
@@ -130,8 +100,9 @@ export const getStaticProps = async ({ params }) => {
 };
 
 export const getStaticPaths = async () => {
+  // TODO: See why this is not dynamic
   const response = await fetch(
-    "https://devquark-blog-production.herokuapp.com/articles?Slug=file-picker-flutter"
+    "https://devquark-blog-production.herokuapp.com/articles"
   );
 
   const parsedResponse = await response.json();

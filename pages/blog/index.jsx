@@ -43,25 +43,34 @@ const Blog = ({ posts }) => {
         <link rel="icon" href="/icon.svg" />
         <link rel="preconnect" href="https://fonts.gstatic.com" />
         <link
-          href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400&family=PT+Sans:wght@400;700&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700;800&family=Sriracha&display=swap"
           rel="stylesheet"
         />
       </Head>
-      <div className="max-w-screen-sm mx-auto my-8">
+      <div className="max-w-screen-lg mx-auto my-8">
         <Nav />
-        <main className="mx-4 sm:max-w-screen-lg sm:w-full  sm:m-auto sm:my-12 sm:grid sm:grid-cols-2 sm:gap-12">
-          {posts.map((article) => (
-            <Link href={`/blog/${article.Slug}`} key={article.Title}>
-              <a>
-                <BlogTile
-                  description={article.Description}
-                  title={article.Title}
-                  author={article.authors[0].Name}
-                  authorImg={article.authors[0].Image.formats.thumbnail.url}
-                />
-              </a>
-            </Link>
-          ))}
+        <main>
+          <section className="max-w-screen-sm mx-auto mt-20 mb-28">
+            <p className="font-sriracha text-xl text-custom-yellow text-center">
+              Blog
+            </p>
+            <h1 className="font-inter font-extrabold text-5xl text-center pt-4 dark:text-white">
+              Documentation of my experiences
+            </h1>
+          </section>
+
+          <div className="grid grid-cols-2 gap-10">
+            {posts.map((article) => (
+              <Link href={`/blog/${article.Slug}`} key={article.Title}>
+                <a>
+                  <BlogTile
+                    title={article.Title}
+                    thumbnail={article.Banner.url}
+                  />
+                </a>
+              </Link>
+            ))}
+          </div>
         </main>
         <footer></footer>
       </div>

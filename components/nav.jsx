@@ -1,9 +1,9 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
 
-const Nav = () => {
+const Nav = ({ width }) => {
   return (
-    <header className="flex items-center justify-between">
+    <header className={`flex items-center justify-between ${width}`}>
       <h1 className="font-inter font-semibold text-xl py-4 cursor-pointer dark:text-white">
         Hrishikesh Pathak
       </h1>
