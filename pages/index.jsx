@@ -7,9 +7,9 @@ import GithubIcon from "../icons/GithubIcon";
 import InstagramIcon from "../icons/InstagramIcon";
 import MailIcon from "../icons/MailIcon";
 import Nav from "../components/nav";
-import LightIcon from "../icons/LightIcon";
+import Link from "next/link";
 
-const Homepage = () => {
+const Homepage = ({ posts }) => {
   return (
     <>
       <Head>
@@ -44,14 +44,17 @@ const Homepage = () => {
           <h2 className="font-inter font-extrabold text-5xl py-2 dark:text-white">
             Some recent posts.
           </h2>
-          <BlogPreviewCard
-            name="Create a basic sitemap for Nextjs website"
-            shortSnippets="This is a short article on creating a basic sitemap for Nextjs website. The sitemap we are building in this article will be very basic and if you are just starting up, I think this will help you to save time and reduce complexity."
-          />
-          <BlogPreviewCard
-            name="Highlight code snippets in Nextjs"
-            shortSnippets="How to implement syntax highlighting in your ReactJS or nextjs site with the help of a prismJs based NPM package, called prism-react-renderer."
-          />
+          {posts
+            .reverse()
+            .slice(0, 3)
+            .map((article) => (
+              <BlogPreviewCard
+                key={article.title}
+                name={article.Title}
+                shortSnippets={article.Description}
+                href={`/blog/${article.Slug}`}
+              />
+            ))}
         </section>
         <section className="my-8">
           <p className="font-sriracha text-custom-pink text-xl">Projects</p>
@@ -71,13 +74,13 @@ const Homepage = () => {
                 PAGES
               </p>
               <p className="font-inter font-medium text-xl text-gray-500  py-1 dark:text-gray-200">
-                Home
+                <Link href="/">Home</Link>
               </p>
               <p className="font-inter font-medium text-xl text-gray-500  py-1 dark:text-gray-200">
-                About
+                <Link href="/">About</Link>
               </p>
               <p className="font-inter font-medium text-xl text-gray-500  py-1 dark:text-gray-200">
-                Blogs
+                <Link href="/blog">Blog</Link>
               </p>
             </div>
             <div>
@@ -99,11 +102,29 @@ const Homepage = () => {
                 SOCIAL
               </p>
               <div className="flex flex-wrap">
-                <TwitterIcon />
-                <LinkedinIcon />
-                <GithubIcon />
-                <InstagramIcon />
-                <MailIcon />
+                <a
+                  href="https://twitter.com/hrishikshpathak"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <TwitterIcon />
+                </a>
+                <a href="https://www.linkedin.com/in/hrishikshpathak">
+                  <LinkedinIcon />
+                </a>
+                <a
+                  href="https://github.com/hrishiksh"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <GithubIcon />
+                </a>
+                <a href="https://www.instagram.com/hrishikesh__pathak/">
+                  <InstagramIcon />
+                </a>
+                <a href="mailto:hrishikeshb2pathak@gmail.com">
+                  <MailIcon />
+                </a>
               </div>
             </div>
           </section>
@@ -118,3 +139,18 @@ const Homepage = () => {
 };
 
 export default Homepage;
+
+export const getStaticProps = async (context) => {
+  const response = await fetch(
+    "https://devquark-blog-production.herokuapp.com/articles"
+  );
+
+  const posts = await response.json();
+
+  return {
+    props: {
+      posts,
+    },
+    revalidate: 60,
+  };
+};

@@ -60,7 +60,7 @@ const Blog = ({ posts }) => {
           </section>
 
           <div className="grid grid-cols-2 gap-10">
-            {posts.map((article) => (
+            {posts.reverse().map((article) => (
               <Link href={`/blog/${article.Slug}`} key={article.Title}>
                 <a>
                   <BlogTile

@@ -5,7 +5,9 @@ const Nav = ({ width }) => {
   return (
     <header className={`flex items-center justify-between ${width}`}>
       <h1 className="font-inter font-semibold text-xl py-4 cursor-pointer dark:text-white">
-        Hrishikesh Pathak
+        <Link href="/">
+          <a>Hrishikesh Pathak</a>
+        </Link>
       </h1>
       <nav>
         <NavElement path="/blog" text="Blog" />
