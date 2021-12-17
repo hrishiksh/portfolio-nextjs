@@ -59,7 +59,7 @@ const BlogPost = ({ parsedResponse }) => {
       <div className="max-w-screen-md mx-4 sm:mx-auto my-2 sm:my-8">
         <Nav />
         <main className="max-w-screen-md sm:mx-auto my-4 sm:my-8">
-          <h1 className="font-inter font-bold text-3xl sm:text-4xl py-6 dark:text-white">
+          <h1 className="font-inter font-bold text-3xl sm:text-4xl sm:font-extrabold py-6 dark:text-white">
             {parsedResponse[0].Title}
           </h1>
           <div className="flex mb-8 w-full">

@@ -28,10 +28,10 @@ const Homepage = ({ posts }) => {
           <p className="font-sriracha text-custom-green text-lg sm:text-xl">
             Hey there,
           </p>
-          <h2 className="font-inter font-extrabold text-3xl sm:text-5xl py-2 dark:text-white">
+          <h2 className="font-inter font-bold sm:font-extrabold text-3xl sm:text-5xl py-2 dark:text-white">
             I'm Hrishikesh.
           </h2>
-          <p className="font-inter font-medium text-base sm:text-xl text-gray-500 py-2 sm:py-4 dark:text-gray-300">
+          <p className="font-inter text-base leading-loose sm:leading-loose font-normal sm:font-medium sm:text-xl text-gray-500 py-2 sm:py-4 dark:text-gray-300">
             I am an full-stack application developer for Android/iOs and web.
             Please explore the site. I am glad you are here.
           </p>
@@ -40,7 +40,7 @@ const Homepage = ({ posts }) => {
           <p className="font-sriracha text-custom-yellow text-lg sm:text-xl">
             Blog
           </p>
-          <h2 className="font-inter font-extrabold text-3xl sm:text-5xl py-2 dark:text-white">
+          <h2 className="font-inter font-bold sm:font-extrabold text-3xl sm:text-5xl py-2 dark:text-white">
             Some recent posts.
           </h2>
           {posts
@@ -59,7 +59,7 @@ const Homepage = ({ posts }) => {
           <p className="font-sriracha text-custom-pink text-lg sm:text-xl">
             Projects
           </p>
-          <h2 className="font-inter font-extrabold text-3xl sm:text-5xl py-2 dark:text-white">
+          <h2 className="font-inter font-bold sm:font-extrabold text-3xl sm:text-5xl py-2 dark:text-white">
             I like to solve problems.
           </h2>
           <ProjectPreviewCard />
