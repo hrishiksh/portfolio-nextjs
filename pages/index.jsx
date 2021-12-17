@@ -73,9 +73,7 @@ const Homepage = ({ posts }) => {
 export default Homepage;
 
 export const getStaticProps = async (context) => {
-  const response = await fetch(
-    "https://devquark-blog-production.herokuapp.com/articles"
-  );
+  const response = await fetch(`${process.env.DOMAINNAME}/articles`);
 
   const posts = await response.json();
 

@@ -88,7 +88,7 @@ export default BlogPost;
 
 export const getStaticProps = async ({ params }) => {
   const response = await fetch(
-    `https://devquark-blog-production.herokuapp.com/articles?Slug=${params.slug}`
+    `${process.env.DOMAINNAME}/articles?Slug=${params.slug}`
   );
 
   const parsedResponse = await response.json();
@@ -102,10 +102,7 @@ export const getStaticProps = async ({ params }) => {
 };
 
 export const getStaticPaths = async () => {
-  // TODO: See why this is not dynamic
-  const response = await fetch(
-    "https://devquark-blog-production.herokuapp.com/articles"
-  );
+  const response = await fetch(`${process.env.DOMAINNAME}/articles`);
 
   const parsedResponse = await response.json();
 
@@ -115,6 +112,6 @@ export const getStaticPaths = async () => {
 
   return {
     paths,
-    fallback: "blocking",
+    fallback: false,
   };
 };
