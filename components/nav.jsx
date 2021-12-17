@@ -4,15 +4,15 @@ import { useRouter } from "next/router";
 const Nav = ({ width }) => {
   return (
     <header className={`flex items-center justify-between ${width}`}>
-      <h1 className="font-inter font-semibold text-xl py-4 cursor-pointer dark:text-white">
+      <h1 className="font-inter font-semibold text-base sm:text-xl py-4 cursor-pointer dark:text-white ">
         <Link href="/">
           <a>Hrishikesh Pathak</a>
         </Link>
       </h1>
       <nav>
         <NavElement path="/blog" text="Blog" />
-        <NavElement path="/resume" text="Resume" />
-        <NavElement path="/about" text="About" />
+        <NavElement path="/project" text="Project" />
+        {/* <NavElement path="/about" text="About" /> */}
       </nav>
     </header>
   );

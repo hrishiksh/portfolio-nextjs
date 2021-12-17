@@ -56,28 +56,30 @@ const BlogPost = ({ parsedResponse }) => {
           rel="stylesheet"
         />
       </Head>
-      <Nav width="max-w-screen-md mx-auto mt-4" />
-      <main className="max-w-screen-md mx-auto my-8">
-        <h1 className="font-inter font-bold text-3xl sm:text-4xl py-6 dark:text-white">
-          {parsedResponse[0].Title}
-        </h1>
-        <div className="flex mb-8 w-full">
-          {parsedResponse[0].categories.map((value) => (
-            <Chips key={value.CategoryName} title={value.CategoryName} />
-          ))}
-        </div>
-        <img
-          className="pb-4"
-          src={parsedResponse[0].Banner.url}
-          alt={parsedResponse[0].Banner.alternativeText}
-        />
-        <ReactMarkdown
-          children={parsedResponse[0].Content}
-          remarkPlugins={[gfm]}
-          components={components}
-        />
-      </main>
-      <footer></footer>
+      <div className="max-w-screen-md mx-4 sm:mx-auto my-2 sm:my-8">
+        <Nav />
+        <main className="max-w-screen-md sm:mx-auto my-4 sm:my-8">
+          <h1 className="font-inter font-bold text-3xl sm:text-4xl py-6 dark:text-white">
+            {parsedResponse[0].Title}
+          </h1>
+          <div className="flex mb-8 w-full">
+            {parsedResponse[0].categories.map((value) => (
+              <Chips key={value.CategoryName} title={value.CategoryName} />
+            ))}
+          </div>
+          <img
+            className="pb-4"
+            src={parsedResponse[0].Banner.url}
+            alt={parsedResponse[0].Banner.alternativeText}
+          />
+          <ReactMarkdown
+            children={parsedResponse[0].Content}
+            remarkPlugins={[gfm]}
+            components={components}
+          />
+        </main>
+        <footer></footer>
+      </div>
     </>
   );
 };
