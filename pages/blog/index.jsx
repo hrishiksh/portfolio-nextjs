@@ -9,17 +9,17 @@ const Blog = ({ posts }) => {
       <NextSeo
         title="Blog | Hrishikesh Pathak"
         description="A documentation of my experiences. The living journel"
-        canonical="https://hrishikeshpathak.com/blog/"
+        canonical="https://hrishikeshpathak.com/blog"
         openGraph={{
           title: "Blog | Hrishikesh Pathak",
           description: "A documentation of my experiences. The living journel",
           type: "website",
-          url: "https://hrishikeshpathak.com/blog/",
+          url: "https://hrishikeshpathak.com/blog",
           images: [
             {
-              url: "/images/profilePicture.jpg",
-              width: 768,
-              height: 432,
+              url: "https://hrishikeshpathak.com/images/profilePicture.jpg",
+              width: 480,
+              height: 480,
               alt: "Image of hrishikesh Pathak",
               type: "image/jpeg",
             },
