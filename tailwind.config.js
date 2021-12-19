@@ -2,7 +2,7 @@ const colors = require("tailwindcss/colors");
 
 module.exports = {
   mode: "jit",
-  purge: [
+  content: [
     "./pages/**/*.{js,jsx,ts,tsx,vue}",
     "./utils/**/*.{js,jsx,ts,tsx,vue}",
     "./icons/**/*.{js,jsx,ts,tsx,vue}",
@@ -20,7 +20,7 @@ module.exports = {
         "custom-green": "#0EAD69",
         "custom-yellow": "#FFD23F",
         "custom-pink": "#EE4266",
-        gray: colors.trueGray,
+        gray: colors.neutral,
       },
     },
   },

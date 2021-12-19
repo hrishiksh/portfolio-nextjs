@@ -1,53 +1,57 @@
 import BlogTile from "../../components/BlogTile";
-import Head from "next/head";
 import Link from "next/link";
 import Nav from "../../components/nav";
-
-// type JsonResponse = [
-//   {
-//     Slug: string;
-//     SocialTitle: string;
-//     SocialDescription: string;
-//     Title: string;
-//     Content: string;
-//     SeoTitle: string;
-//     Description: string;
-//     SeoDescription: string;
-//     published_at: string;
-//     updatedAt: string;
-//     Banner: {
-//       alternativeText: string;
-//       url: string;
-//       formats: { thumbnail: { url: string } };
-//     };
-//     authors: [
-//       {
-//         Name: string;
-//         Description: string;
-//         Image: {
-//           alternativeText: string;
-//           url: string;
-//           formats: { thumbnail: { url: string } };
-//         };
-//       }
-//     ];
-//     categories: [{ CategoryName: string }];
-//   }
-// ];
+import { NextSeo } from "next-seo";
 
 const Blog = ({ posts }) => {
   return (
     <>
-      <Head>
-        <title>Devquark Blog</title>
-        <link rel="icon" href="/icon.svg" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700;800&family=Sriracha&display=swap"
-          rel="stylesheet"
-        />
-      </Head>
-      <div className="max-w-screen-lg mx-4 sm:mx-auto my-2 sm:my-8">
+      <NextSeo
+        title="Blog | Hrishikesh Pathak"
+        description="A documentation of my experiences. The living journel"
+        canonical="https://hrishikeshpathak.com/blog/"
+        openGraph={{
+          title: "Blog | Hrishikesh Pathak",
+          description: "A documentation of my experiences. The living journel",
+          type: "website",
+          url: "https://hrishikeshpathak.com/blog/",
+          images: [
+            {
+              url: "/images/profilePicture.jpg",
+              width: 768,
+              height: 432,
+              alt: "Image of hrishikesh Pathak",
+              type: "image/jpeg",
+            },
+          ],
+          site_name: "Hrishikesh Pathak",
+        }}
+        twitter={{
+          handle: "@hrishikshpathak",
+          site: "@hrishikshpathak",
+          cardType: "summary_large_image",
+        }}
+        additionalLinkTags={[
+          {
+            rel: "icon",
+            href: "/images/favicon.webp",
+          },
+          {
+            rel: "apple-touch-icon",
+            href: "/images/favicon.webp",
+            sizes: "70x70",
+          },
+          {
+            rel: "preconnect",
+            href: "https://fonts.gstatic.com",
+          },
+          {
+            rel: "stylesheet",
+            href: "https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700;800&family=Sriracha&display=swap",
+          },
+        ]}
+      />
+      <div className="max-w-screen-lg mx-4 sm:mx-auto my-2 sm:my-6">
         <Nav />
         <main>
           <section className="mx-auto mt-10 mb-14 sm:mt-20 sm:mb-28">

@@ -10,14 +10,18 @@ const Homepage = ({ posts }) => {
       <Head>
         <title>Hi i'm Hrishikesh</title>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin />
+        <link
+          rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossOrigin="true"
+        />
         <link
           href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700;800&family=Sriracha&display=swap"
           rel="stylesheet"
         />
       </Head>
 
-      <div className="max-w-screen-sm mx-4 sm:mx-auto my-2 sm:my-8">
+      <div className="max-w-screen-sm mx-4 sm:mx-auto my-2 sm:my-6">
         <Nav />
         <img
           className="rounded-[50%] h-40 sm:h-52 p-2 border-solid border-custom-green border-4 my-8"
