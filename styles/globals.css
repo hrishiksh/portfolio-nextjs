@@ -7,6 +7,6 @@
     @apply font-inter pl-4 text-base sm:text-lg cursor-pointer text-custom-green;
   }
   .inactive-nav-element {
-    @apply font-inter pl-4 text-base sm:text-lg text-gray-500 cursor-pointer hover:text-custom-green dark:text-gray-100;
+    @apply font-inter pl-4 text-base sm:text-lg text-gray-600 cursor-pointer hover:text-custom-green dark:text-gray-100;
   }
 }

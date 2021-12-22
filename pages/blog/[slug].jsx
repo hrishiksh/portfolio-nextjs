@@ -1,4 +1,3 @@
-import Head from "next/head";
 import Chips from "../../components/Chips";
 import { components } from "../../utils/mdxComponentStyle";
 import { NextSeo } from "next-seo";
@@ -11,14 +10,13 @@ const BlogPost = ({ parsedResponse }) => {
     <>
       <NextSeo
         title={parsedResponse[0].SeoTitle}
-        titleTemplate="%s | Devquark"
         description={parsedResponse[0].SeoDescription}
-        canonical={`https://www.devquark.com/blog/${parsedResponse[0].Slug}`}
+        canonical={`https://hrishikeshpathak.com/blog/${parsedResponse[0].Slug}`}
         openGraph={{
           title: parsedResponse[0].SocialTitle,
           description: parsedResponse[0].SocialDescription,
           type: "article",
-          url: `https://www.devquark.com/blog/${parsedResponse[0].Slug}`,
+          url: `https://hrishikeshpathak.com/blog/${parsedResponse[0].Slug}`,
           article: {
             publishedTime: parsedResponse[0].published_at,
             modifiedTime: parsedResponse[0].updatedAt,
@@ -30,36 +28,44 @@ const BlogPost = ({ parsedResponse }) => {
           images: [
             {
               url: parsedResponse[0].Banner.url,
-              width: 1280,
+              width: 768,
+              height: 432,
               alt: parsedResponse[0].Banner.alternativeText,
+              type: "image/webp",
             },
           ],
-          site_name: "Devquark",
+          site_name: "Hrishikesh Pathak",
         }}
         twitter={{
           handle: "@hrishikshpathak",
-          site: "@hrishikeshpathak",
+          site: "@hrishikshpathak",
           cardType: "summary_large_image",
         }}
+        additionalLinkTags={[
+          {
+            rel: "icon",
+            href: "/images/favicon.webp",
+          },
+          {
+            rel: "apple-touch-icon",
+            href: "/images/favicon.webp",
+            sizes: "70x70",
+          },
+          {
+            rel: "preconnect",
+            href: "https://fonts.gstatic.com",
+          },
+          {
+            rel: "stylesheet",
+            href: "https://fonts.googleapis.com/css2?family=Inconsolata&family=Inter:wght@400;500;600;700&family=Sriracha&display=swap",
+          },
+        ]}
       />
-      <Head>
-        <link rel="icon" href="/icon.svg" />
-        <link rel="apple-touch-icon" href="/icon.svg" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" />
-        <link
-          rel="preconnect"
-          href="https://fonts.gstatic.com"
-          crossOrigin="true"
-        />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Inconsolata&family=Inter:wght@400;500;600;700&family=Sriracha&display=swap"
-          rel="stylesheet"
-        />
-      </Head>
-      <div className="max-w-screen-md mx-4 sm:mx-auto my-2 sm:my-8">
+
+      <div className="max-w-screen-md mx-4 sm:mx-auto my-2 sm:my-6">
         <Nav />
         <main className="max-w-screen-md sm:mx-auto my-4 sm:my-8">
-          <h1 className="font-inter font-bold text-3xl sm:text-4xl py-6 dark:text-white">
+          <h1 className="font-inter font-bold text-3xl sm:text-4xl sm:font-extrabold py-6 dark:text-white">
             {parsedResponse[0].Title}
           </h1>
           <div className="flex mb-8 w-full">
