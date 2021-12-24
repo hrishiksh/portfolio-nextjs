@@ -1,7 +1,11 @@
+import fs from "fs";
+import path from "path";
 import BlogTile from "../../components/BlogTile";
 import Link from "next/link";
 import Nav from "../../components/nav";
 import { NextSeo } from "next-seo";
+import { postFilePaths, POSTS_PATH } from "../../utils/mdxUtils";
+import matter from "gray-matter";
 
 const Blog = ({ posts }) => {
   return (
@@ -64,12 +68,15 @@ const Blog = ({ posts }) => {
           </section>
 
           <div className="sm:grid sm:grid-cols-2 sm:gap-10">
-            {posts.reverse().map((article) => (
-              <Link href={`/blog/${article.Slug}`} key={article.Title}>
+            {posts.map((article) => (
+              <Link
+                href={`/blog/${article.data.slug}`}
+                key={article.data.title}
+              >
                 <a>
                   <BlogTile
-                    title={article.Title}
-                    thumbnail={article.Banner.url}
+                    title={article.data.title}
+                    thumbnail={article.data.hero}
                   />
                 </a>
               </Link>
@@ -85,14 +92,14 @@ const Blog = ({ posts }) => {
 export default Blog;
 
 export const getStaticProps = async (context) => {
-  const response = await fetch(`${process.env.DOMAINNAME}/articles`);
+  const posts = postFilePaths.map((filePath) => {
+    const source = fs.readFileSync(path.join(POSTS_PATH, filePath));
+    const { data } = matter(source);
+    return {
+      data,
+      filePath,
+    };
+  });
 
-  const posts = await response.json();
-
-  return {
-    props: {
-      posts,
-    },
-    revalidate: 60,
-  };
+  return { props: { posts } };
 };

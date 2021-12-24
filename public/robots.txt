@@ -1,9 +1,0 @@
-# *
-User-agent: *
-Allow: /
-
-# Host
-Host: https://hrishikeshpathak.com
-
-# Sitemaps
-Sitemap: https://hrishikeshpathak.com/sitemap.xml

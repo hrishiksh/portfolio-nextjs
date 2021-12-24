@@ -1,5 +1,5 @@
-import { ReactNode } from "react";
 import CodeBlock from "../components/CodeBlock";
+import Nav from "../components/nav";
 
 export const components = {
   h2: (props) => (
@@ -62,8 +62,8 @@ export const components = {
   pre: (props) => {
     return (
       <CodeBlock
-        code={props.children[0].props.children[0]}
-        language={props.children[0].props.className.split("-")[1]}
+        code={props.children.props.children}
+        language={props.children.props.className.split("-")[1]}
       />
     );
   },

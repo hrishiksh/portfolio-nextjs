@@ -3,6 +3,10 @@ import ProjectPreviewCard from "../components/ProjectPreviewCard";
 import Nav from "../components/nav";
 import Footer from "../components/Footer";
 import { NextSeo } from "next-seo";
+import { postFilePaths, POSTS_PATH } from "../utils/mdxUtils";
+import fs from "fs";
+import path from "path";
+import matter from "gray-matter";
 
 const Homepage = ({ posts }) => {
   return (
@@ -86,17 +90,14 @@ const Homepage = ({ posts }) => {
           <h2 className="font-inter font-bold sm:font-extrabold text-3xl sm:text-5xl py-2 dark:text-white">
             Some recent posts.
           </h2>
-          {posts
-            .reverse()
-            .slice(0, 3)
-            .map((article) => (
-              <BlogPreviewCard
-                key={article.Slug}
-                name={article.Title}
-                shortSnippets={article.Description}
-                href={`/blog/${article.Slug}`}
-              />
-            ))}
+          {posts.slice(0, 3).map((article) => (
+            <BlogPreviewCard
+              key={article.data.slug}
+              name={article.data.title}
+              shortSnippets={article.data.description}
+              href={`/blog/${article.data.slug}`}
+            />
+          ))}
         </section>
         <section className="my-8">
           <p className="font-sriracha text-custom-pink text-lg sm:text-xl">
@@ -116,14 +117,13 @@ const Homepage = ({ posts }) => {
 export default Homepage;
 
 export const getStaticProps = async (context) => {
-  const response = await fetch(`${process.env.DOMAINNAME}/articles`);
+  const posts = postFilePaths.map((filePath) => {
+    const source = fs.readFileSync(path.join(POSTS_PATH, filePath));
+    const { data } = matter(source);
+    return {
+      data,
+    };
+  });
 
-  const posts = await response.json();
-
-  return {
-    props: {
-      posts,
-    },
-    revalidate: 60,
-  };
+  return { props: { posts } };
 };
