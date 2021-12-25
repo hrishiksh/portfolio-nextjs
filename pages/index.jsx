@@ -7,6 +7,7 @@ import { postFilePaths, POSTS_PATH } from "../utils/mdxUtils";
 import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
+import Head from "next/head";
 
 const Homepage = ({ posts }) => {
   return (
@@ -63,7 +64,12 @@ const Homepage = ({ posts }) => {
           },
         ]}
       />
-
+      <Head>
+        <meta
+          name="google-site-verification"
+          content="TLsi20acjV6Wy0Guhk37LM0UsumUEkViUebHGjOAhGY"
+        />
+      </Head>
       <div className="max-w-screen-sm mx-4 sm:mx-auto my-2 sm:my-6">
         <Nav />
         <img
