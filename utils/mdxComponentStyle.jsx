@@ -1,5 +1,4 @@
 import CodeBlock from "../components/CodeBlock";
-import Nav from "../components/nav";
 
 export const components = {
   h2: (props) => (
@@ -32,12 +31,14 @@ export const components = {
       {...props}
     />
   ),
-  code: (props) => (
-    <code
-      className="bg-gray-200 px-2 py-1 text-base sm:text-lg font-inconsolata rounded dark:bg-gray-600"
-      {...props}
-    />
-  ),
+  inlineCode: (props) => {
+    return (
+      <code
+        className="bg-gray-100 px-2 py-1 text-base sm:text-lg font-inconsolata rounded dark:bg-gray-700"
+        {...props}
+      />
+    );
+  },
 
   blockquote: (props) => (
     <blockquote
