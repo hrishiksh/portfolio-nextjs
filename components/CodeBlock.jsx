@@ -21,7 +21,7 @@ const CodeBlock = ({ code, language }) => {
       >
         {({ className, style, tokens, getLineProps, getTokenProps }) => (
           <pre
-            className={`${className} font-inconsolata text-base sm:text-lg px-8 pt-8 rounded-md bg-gray-200 overflow-auto my-4 dark:bg-gray-700`}
+            className={`${className} font-inconsolata text-base sm:text-lg px-8 pt-8 rounded-md bg-gray-100 overflow-auto my-4 dark:bg-gray-700/50`}
           >
             {tokens.map((line, i) => (
               <div {...getLineProps({ line, key: i })}>
