@@ -34,7 +34,7 @@ export const components = {
   inlineCode: (props) => {
     return (
       <code
-        className="bg-gray-100 px-2 py-1 text-base sm:text-lg font-inconsolata rounded dark:bg-gray-700"
+        className="bg-gray-100 px-2 py-1 text-base sm:text-lg font-inconsolata rounded text-custom-pink dark:bg-gray-700"
         {...props}
       />
     );
