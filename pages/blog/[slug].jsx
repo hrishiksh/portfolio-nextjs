@@ -6,6 +6,7 @@ import Chips from "../../components/Chips";
 import { components } from "../../utils/mdxComponentStyle";
 import { NextSeo } from "next-seo";
 import Nav from "../../components/nav";
+import Footer from "../../components/Footer";
 import { postFilePaths, POSTS_PATH } from "../../utils/mdxUtils";
 import path from "path";
 
@@ -78,7 +79,7 @@ const BlogPost = ({ source, data }) => {
           <img className="pb-4" src={data.hero} alt={data.title} />
           <MDXRemote {...source} components={components} />
         </main>
-        <footer></footer>
+        <Footer />
       </div>
     </>
   );
