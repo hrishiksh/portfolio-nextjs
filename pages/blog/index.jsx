@@ -4,6 +4,7 @@ import BlogTile from "../../components/BlogTile";
 import Link from "next/link";
 import Nav from "../../components/nav";
 import { NextSeo } from "next-seo";
+import Footer from "../../components/Footer";
 import { postFilePaths, POSTS_PATH } from "../../utils/mdxUtils";
 import matter from "gray-matter";
 
@@ -57,8 +58,8 @@ const Blog = ({ posts }) => {
       />
       <div className="max-w-screen-lg mx-4 sm:mx-auto my-2 sm:my-6">
         <Nav />
-        <main>
-          <section className="mx-auto mt-10 mb-14 sm:mt-20 sm:mb-28">
+        <main className="py-4 sm:py-10">
+          <section className="mx-auto mb-14 mt-6 sm:mt-10 sm:mb-28">
             <p className="font-sriracha text-xl text-custom-yellow text-center">
               Blog
             </p>
@@ -83,7 +84,7 @@ const Blog = ({ posts }) => {
             ))}
           </div>
         </main>
-        <footer></footer>
+        <Footer />
       </div>
     </>
   );

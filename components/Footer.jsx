@@ -7,7 +7,7 @@ import MailIcon from "../icons/MailIcon";
 const Footer = () => {
   return (
     <footer>
-      <div className="w-full h-[2px] bg-black"></div>
+      <div className="w-full h-[1px] bg-gray-200 dark:bg-gray-600"></div>
       <section className="flex justify-between my-8">
         <div>
           <p className="font-inter font-semibold text-base sm:text-xl py-2 dark:text-white">
