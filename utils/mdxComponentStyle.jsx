@@ -64,7 +64,7 @@ export const components = {
     return (
       <CodeBlock
         code={props.children.props.children}
-        language={props.children.props.className.split("-")[1]}
+        language={props.children.props.className?.split("-")[1]}
       />
     );
   },
