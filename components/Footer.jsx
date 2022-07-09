@@ -70,7 +70,7 @@ const Footer = () => {
       </section>
       <div className="w-full h-[1px] bg-gray-200 dark:bg-gray-600 mb-2"></div>
       <p className="font-inter font-medium text-base sm:text-xl text-gray-500  py-1 dark:text-gray-200">
-        © 2021 Hrishikesh Pathak. All rights reserved.
+        © 2022 Hrishikesh Pathak. All rights reserved.
       </p>
     </footer>
   );
