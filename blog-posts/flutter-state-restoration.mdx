@@ -8,7 +8,7 @@ seoDescription: Flutter state restoration is fairly new. In this article, we dem
 socialTitle: How to go back in time and store flutter state
 socialDescription: Flutter state restoration is fairly new. In this article, we demonstrate how to restore flutter counter app and a text field.
 created: "2022-01-31"
-updated: "2022-01-31"
+updated: "2022-07-09"
 author: Hrishikesh Pathak
 categories: flutter
 ---
@@ -132,7 +132,7 @@ First, add a unique `restorationScopeId` inside your material app. It requires a
 
 ```dart
 MaterialApp(
-++      restorationScopeId: 'app',
+      restorationScopeId: 'app',
       title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.blue,
@@ -146,8 +146,7 @@ Now we have to add the `RestorationMixin`. It enables us to store the state of t
 Here we add the `RestorationMixin` with `_MyHomePageState` class. Be cautious, we have to add the mixin with `_MyHomePageState` not with `MyHomePage`.
 
 ```dart
--- class _MyHomePageState extends State<MyHomePage>{
-++ class _MyHomePageState extends State<MyHomePage> with RestorationMixin{
+class _MyHomePageState extends State<MyHomePage> with RestorationMixin{
 
 }
 ```
@@ -156,8 +155,7 @@ Now we have to add a `RestorationProperty` to store state. For that, we replace 
 
 ```dart
 class _MyHomePageState extends State<MyHomePage> with RestorationMixin{
---  int _counter = 0;
-++	RestorableInt _counter = RestorableInt(0);
+	RestorableInt _counter = RestorableInt(0);
 }
 ```
 
@@ -168,8 +166,7 @@ Let’s change our code to adopt the new behavior of `_counter` variable.
 ```dart
 void _incrementCounter() {
     setState(() {
---    _counter++;
-++    _counter.value++;
+    _counter.value++;
     });
   }
 
@@ -187,8 +184,7 @@ void _incrementCounter() {
               'You have pushed the button this many times:',
             ),
             Text(
---            '$_counter'
-++            '${_counter.value}',
+            '${_counter.value}',
               style: Theme.of(context).textTheme.headline4,
             ),
           ],
@@ -337,7 +333,7 @@ Now inside your `TextField` add the `_controller` we have defiled above.
         title: Text(widget.title),
       ),
       body: TextField(
-++        controller: _controller.value,
+        controller: _controller.value,
       ),
     );
   }

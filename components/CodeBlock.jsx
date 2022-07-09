@@ -21,40 +21,12 @@ const CodeBlock = ({ code, language }) => {
       >
         {({ className, style, tokens, getLineProps, getTokenProps }) => (
           <pre
-            className={`${className} font-inconsolata text-base sm:text-lg pt-8 rounded-md bg-gray-100 overflow-auto my-4 dark:bg-gray-700/50`}
+            className={`${className} font-inconsolata text-base sm:text-lg py-8 rounded-md bg-gray-100 overflow-auto my-4 dark:bg-gray-700/50`}
           >
             {tokens.map(function (line, i) {
-              if (
-                line[0]?.content.includes("++") ||
-                line[1]?.content.includes("++")
-              ) {
-                return (
-                  <div
-                    {...getLineProps({ line, key: i })}
-                    className="bg-green-500/20 pl-1 pr-8"
-                  >
-                    {line.map((token, key) => (
-                      <span {...getTokenProps({ token, key })} />
-                    ))}
-                  </div>
-                );
-              } else if (
-                line[0]?.content.includes("--") ||
-                line[1]?.content.includes("--")
-              ) {
-                return (
-                  <div
-                    {...getLineProps({ line, key: i })}
-                    className="bg-red-500/20 pl-1 pr-8"
-                  >
-                    {line.map((token, key) => (
-                      <span {...getTokenProps({ token, key })} />
-                    ))}
-                  </div>
-                );
-              }
               return (
-                <div {...getLineProps({ line, key: i })} className="px-8">
+                <div {...getLineProps({ line, key: i })} className="px-4">
+                  <span className="pr-4">{i + 1}</span>
                   {line.map((token, key) => (
                     <span {...getTokenProps({ token, key })} />
                   ))}
