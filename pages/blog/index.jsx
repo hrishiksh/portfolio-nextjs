@@ -8,7 +8,7 @@ import Footer from "../../components/Footer";
 import { postFilePaths, POSTS_PATH } from "../../utils/mdxUtils";
 import matter from "gray-matter";
 
-const Blog = ({ posts }) => {
+const Blog = ({ sortedPosts }) => {
   return (
     <>
       <NextSeo
@@ -36,25 +36,6 @@ const Blog = ({ posts }) => {
           site: "@hrishikshpathak",
           cardType: "summary_large_image",
         }}
-        additionalLinkTags={[
-          {
-            rel: "icon",
-            href: "/images/favicon.webp",
-          },
-          {
-            rel: "apple-touch-icon",
-            href: "/images/favicon.webp",
-            sizes: "70x70",
-          },
-          {
-            rel: "preconnect",
-            href: "https://fonts.gstatic.com",
-          },
-          {
-            rel: "stylesheet",
-            href: "https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700;800&family=Sriracha&display=swap",
-          },
-        ]}
       />
       <div className="max-w-screen-lg mx-4 sm:mx-auto my-2 sm:my-6">
         <Nav />
@@ -69,7 +50,7 @@ const Blog = ({ posts }) => {
           </section>
 
           <div className="sm:grid sm:grid-cols-2 sm:gap-10">
-            {posts.map((article) => (
+            {sortedPosts.map((article) => (
               <Link
                 href={`/blog/${article.data.slug}`}
                 key={article.data.title}
@@ -78,6 +59,8 @@ const Blog = ({ posts }) => {
                   <BlogTile
                     title={article.data.title}
                     thumbnail={article.data.hero}
+                    author={article.data.author}
+                    date={article.data.updated}
                   />
                 </a>
               </Link>
@@ -102,5 +85,13 @@ export const getStaticProps = async (context) => {
     };
   });
 
-  return { props: { posts } };
+  const sortedPosts = posts
+    .sort(function (a, b) {
+      const date1 = new Date(a.data.updated);
+      const date2 = new Date(b.data.updated);
+      return date1 - date2;
+    })
+    .reverse();
+
+  return { props: { sortedPosts } };
 };

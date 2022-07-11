@@ -17,7 +17,7 @@ const Footer = () => {
             <Link href="/">Home</Link>
           </p>
           <p className="font-inter font-medium text-base sm:text-xl text-gray-500  py-1 dark:text-gray-200">
-            <Link href="/">About</Link>
+            <Link href="/">Resume</Link>
           </p>
           <p className="font-inter font-medium text-base sm:text-xl text-gray-500  py-1 dark:text-gray-200">
             <Link href="/blog">Blog</Link>
@@ -27,15 +27,21 @@ const Footer = () => {
           <p className="font-inter font-semibold text-base sm:text-xl py-2 dark:text-white">
             EXTRA
           </p>
-          <p className="font-inter font-medium text-base sm:text-xl text-gray-500 py-1 dark:text-gray-200">
-            Newsletter
-          </p>
-          <p className="font-inter font-medium text-base sm:text-xl text-gray-500 py-1 dark:text-gray-200">
-            Resume
-          </p>
-          <p className="font-inter font-medium text-base sm:text-xl text-gray-500 py-1 dark:text-gray-200">
-            Snippets
-          </p>
+          <Link href="/about">
+            <a className="block font-inter font-medium text-base sm:text-xl text-gray-500 py-1 dark:text-gray-200">
+              About
+            </a>
+          </Link>
+          <Link href="/terms-and-conditions">
+            <a className="block font-inter font-medium text-base sm:text-xl text-gray-500 py-1 dark:text-gray-200">
+              Terms & conditions
+            </a>
+          </Link>
+          <Link href="/privacy-policy">
+            <a className="block font-inter font-medium text-base sm:text-xl text-gray-500 py-1 dark:text-gray-200">
+              Privacy policy
+            </a>
+          </Link>
         </div>
         <div className="max-w-[33%]">
           <p className="font-inter font-semibold text-base sm:text-xl py-2 dark:text-white">

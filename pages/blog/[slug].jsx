@@ -44,25 +44,6 @@ const BlogPost = ({ source, data }) => {
           site: "@hrishikshpathak",
           cardType: "summary_large_image",
         }}
-        additionalLinkTags={[
-          {
-            rel: "icon",
-            href: "/images/favicon.webp",
-          },
-          {
-            rel: "apple-touch-icon",
-            href: "/images/favicon.webp",
-            sizes: "70x70",
-          },
-          {
-            rel: "preconnect",
-            href: "https://fonts.gstatic.com",
-          },
-          {
-            rel: "stylesheet",
-            href: "https://fonts.googleapis.com/css2?family=Inconsolata&family=Inter:wght@400;500;600;700&family=Sriracha&display=swap",
-          },
-        ]}
       />
 
       <div className="max-w-screen-md mx-4 sm:mx-auto my-2 sm:my-6">
