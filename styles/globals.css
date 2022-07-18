@@ -10,3 +10,114 @@
     @apply font-inter pl-4 text-base sm:text-lg text-gray-600 cursor-pointer hover:text-custom-green dark:text-gray-100;
   }
 }
+
+/* inter-regular - latin */
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/inter-v12-latin-regular.eot"); /* IE9 Compat Modes */
+  src: local(""),
+    url("/fonts/inter-v12-latin-regular.eot?#iefix") format("embedded-opentype"),
+    /* IE6-IE8 */ url("/fonts/inter-v12-latin-regular.woff2") format("woff2"),
+    /* Super Modern Browsers */ url("/fonts/inter-v12-latin-regular.woff")
+      format("woff"),
+    /* Modern Browsers */ url("/fonts/inter-v12-latin-regular.ttf")
+      format("truetype"),
+    /* Safari, Android, iOS */ url("/fonts/inter-v12-latin-regular.svg#Inter")
+      format("svg"); /* Legacy iOS */
+}
+
+/* inter-500 - latin */
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("/fonts/inter-v12-latin-500.eot"); /* IE9 Compat Modes */
+  src: local(""),
+    url("/fonts/inter-v12-latin-500.eot?#iefix") format("embedded-opentype"),
+    /* IE6-IE8 */ url("/fonts/inter-v12-latin-500.woff2") format("woff2"),
+    /* Super Modern Browsers */ url("/fonts/inter-v12-latin-500.woff")
+      format("woff"),
+    /* Modern Browsers */ url("/fonts/inter-v12-latin-500.ttf")
+      format("truetype"),
+    /* Safari, Android, iOS */ url("/fonts/inter-v12-latin-500.svg#Inter")
+      format("svg"); /* Legacy iOS */
+}
+
+/* inter-600 - latin */
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("/fonts/inter-v12-latin-600.eot"); /* IE9 Compat Modes */
+  src: local(""),
+    url("/fonts/inter-v12-latin-600.eot?#iefix") format("embedded-opentype"),
+    /* IE6-IE8 */ url("/fonts/inter-v12-latin-600.woff2") format("woff2"),
+    /* Super Modern Browsers */ url("/fonts/inter-v12-latin-600.woff")
+      format("woff"),
+    /* Modern Browsers */ url("/fonts/inter-v12-latin-600.ttf")
+      format("truetype"),
+    /* Safari, Android, iOS */ url("/fonts/inter-v12-latin-600.svg#Inter")
+      format("svg"); /* Legacy iOS */
+}
+
+/* inter-700 - latin */
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("/fonts/inter-v12-latin-700.eot"); /* IE9 Compat Modes */
+  src: local(""),
+    url("/fonts/inter-v12-latin-700.eot?#iefix") format("embedded-opentype"),
+    /* IE6-IE8 */ url("/fonts/inter-v12-latin-700.woff2") format("woff2"),
+    /* Super Modern Browsers */ url("/fonts/inter-v12-latin-700.woff")
+      format("woff"),
+    /* Modern Browsers */ url("/fonts/inter-v12-latin-700.ttf")
+      format("truetype"),
+    /* Safari, Android, iOS */ url("/fonts/inter-v12-latin-700.svg#Inter")
+      format("svg"); /* Legacy iOS */
+}
+
+/* inconsolata-regular - latin */
+@font-face {
+  font-family: "Inconsolata";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/inconsolata-v31-latin-regular.eot"); /* IE9 Compat Modes */
+  src: local(""),
+    url("/fonts/inconsolata-v31-latin-regular.eot?#iefix")
+      format("embedded-opentype"),
+    /* IE6-IE8 */ url("/fonts/inconsolata-v31-latin-regular.woff2")
+      format("woff2"),
+    /* Super Modern Browsers */ url("/fonts/inconsolata-v31-latin-regular.woff")
+      format("woff"),
+    /* Modern Browsers */ url("/fonts/inconsolata-v31-latin-regular.ttf")
+      format("truetype"),
+    /* Safari, Android, iOS */
+      url("/fonts/inconsolata-v31-latin-regular.svg#Inconsolata") format("svg"); /* Legacy iOS */
+}
+
+/* sriracha-regular - latin */
+@font-face {
+  font-family: "Sriracha";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/sriracha-v10-latin-regular.eot"); /* IE9 Compat Modes */
+  src: local(""),
+    url("/fonts/sriracha-v10-latin-regular.eot?#iefix")
+      format("embedded-opentype"),
+    /* IE6-IE8 */ url("/fonts/sriracha-v10-latin-regular.woff2") format("woff2"),
+    /* Super Modern Browsers */ url("/fonts/sriracha-v10-latin-regular.woff")
+      format("woff"),
+    /* Modern Browsers */ url("/fonts/sriracha-v10-latin-regular.ttf")
+      format("truetype"),
+    /* Safari, Android, iOS */
+      url("/fonts/sriracha-v10-latin-regular.svg#Sriracha") format("svg"); /* Legacy iOS */
+}

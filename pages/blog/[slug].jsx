@@ -16,7 +16,6 @@ const BlogPost = ({ source, data }) => {
       <NextSeo
         title={data.seoTitle}
         description={data.seoDescription}
-        canonical={`https://hrishikeshpathak.com/blog/${data.slug}`}
         openGraph={{
           title: data.socialTitle,
           description: data.socialDescription,
@@ -30,7 +29,7 @@ const BlogPost = ({ source, data }) => {
           },
           images: [
             {
-              url: data.hero,
+              url: `https://hrishikeshpathak.com${data.hero}`,
               width: 768,
               height: 432,
               alt: data.title,
