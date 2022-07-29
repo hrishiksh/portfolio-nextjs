@@ -1,4 +1,5 @@
 import CodeBlock from "../components/CodeBlock";
+import Vid from "../components/Vid";
 
 export const components = {
   h2: (props) => (
@@ -67,5 +68,8 @@ export const components = {
         language={props.children.props.className?.split("-")[1]}
       />
     );
+  },
+  Vid: (props) => {
+    return <Vid url={props.url} />;
   },
 };

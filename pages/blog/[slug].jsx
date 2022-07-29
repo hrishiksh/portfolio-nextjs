@@ -48,7 +48,7 @@ const BlogPost = ({ source, data }) => {
       <div className="max-w-screen-md mx-4 sm:mx-auto my-2 sm:my-6">
         <Nav />
         <main className="max-w-screen-md sm:mx-auto my-4 sm:my-8">
-          <h1 className="font-inter font-bold text-3xl sm:text-4xl sm:font-extrabold py-6 dark:text-white">
+          <h1 className="font-inter font-bold text-3xl leading-loose sm:text-4xl sm:font-extrabold py-6 dark:text-white">
             {data.title}
           </h1>
           <div className="flex mb-8 w-full">
