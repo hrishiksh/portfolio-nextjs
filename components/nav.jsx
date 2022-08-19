@@ -1,18 +1,17 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
+import PrimaryBtn from "./PrimaryBtn";
 
 const Nav = ({ width }) => {
   return (
     <header className={`flex items-center justify-between ${width}`}>
       <Link href="/">
-        <a className="font-inter font-semibold text-base sm:text-xl py-4 cursor-pointer dark:text-white ">
-          Hrishikesh Pathak
-        </a>
+        <img className="h-20" src="/images/logo.svg" alt="" />
       </Link>
       <nav>
         <NavElement path="/blog" text="Blog" />
         <NavElement path="/project" text="Project" />
-        {/* <NavElement path="/about" text="About" /> */}
+        <PrimaryBtn label="Contact me" />
       </nav>
     </header>
   );

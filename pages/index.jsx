@@ -51,13 +51,35 @@ const Homepage = ({ posts }) => {
           content="TLsi20acjV6Wy0Guhk37LM0UsumUEkViUebHGjOAhGY"
         />
       </Head>
-      <div className="max-w-screen-sm mx-4 sm:mx-auto my-2 sm:my-6">
+      <div className="max-w-screen-lg mx-4 sm:mx-auto my-2 sm:my-6">
         <Nav />
-        <img
-          className="rounded-[50%] h-40 sm:h-52 p-2 border-solid border-custom-green border-4 my-8"
-          src="/images/profilePicture.jpg"
-          alt="Image of Hrishikesh Pathak"
-        />
+        <main className="w-full">
+          <section className="my-32">
+            <h1 className="font-inter font-bold text-4xl m-auto text-center">
+              Web Developer & Content Writer
+            </h1>
+            <p className="font-inter font-normal text-lg text-slate-600 m-auto text-center mt-2">
+              I make web applications and like to write about them
+            </p>
+            <img
+              className="rounded-full h-40 sm:h-52 p-2 border-solid border-custom-green border-4 mt-8 mx-auto"
+              src="/images/profilePicture.jpg"
+              alt="Image of Hrishikesh Pathak"
+            />
+          </section>
+          <section className="w-full bg-slate-700 pt-14 pb-32 rounded-md">
+            <h2 className="font-inter font-semibold text-2xl text-white text-center pb-6">
+              Hey there, I’m Hrishikesh
+            </h2>
+            <p className="font-inter font-medium text-lg w-1/2 text-white text-center m-auto">
+              Primarily I am a web developer. I also make apps with flutter. In
+              my free time, I write blog articles. I have 5 years of freelancing
+              experience and worked with many brands. Please explore this site.
+              I am glad you are here.
+            </p>
+          </section>
+        </main>
+
         <section className="my-8">
           <p className="font-sriracha text-custom-green text-lg sm:text-xl">
             Hey there,
