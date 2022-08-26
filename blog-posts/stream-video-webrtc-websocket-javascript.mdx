@@ -1,0 +1,329 @@
+---
+title: Video streaming using webRTC and websocket in Javascript
+description: Codemagic CI/CD abstract out application building and releasing task and let you foucus more on writing code. Push the latest release and codemagic wil handle the rest for you.
+slug: stream-video-webrtc-websocket-javascript
+hero: /blog-images/build-test-deploy-flutter-codemagic.webp
+seoTitle: How to stream video using webRTC and websocket in Javascript
+seoDescription: Codemagic CI/CD abstract out application building and releasing task and let you foucus more on writing code. Push the latest release and codemagic wil handle the rest for you.
+socialTitle: How to stream video using webRTC and websocket in Javascript
+socialDescription: Codemagic CI/CD abstract out application building and releasing task and let you foucus more on writing code. Push the latest release and codemagic wil handle the rest for you.
+created: "2022-08-19"
+updated: "2022-08-19"
+author: Hrishikesh Pathak
+categories: web
+---
+
+Making a video streaming app with webRTC is not hard nowadays. You can easily make your own zoom or google meet clone using webRTC technology. This is a complete step-by-step guide on how to use webRTC with javascript in your web project.
+
+[WebRTC](https://webrtc.org/) stands for Web Real-Time communication. This is a peer-to-peer framework to send voice, video, and generic data that works on open standards. All modern browsers support webRTC and provide native javascript APIs. For other platforms like android and IOs have their own native packages for webRTC. Cross-platform application framework [flutter](https://flutter.dev/) also has a webRTC package that works on android, ios, and web with a single codebase. This is an article to know more about webRTC implementation using Flutter.
+
+## Agenda of this tutorial
+
+In this tutorial, we will develop our own video conferencing app with WebRTC. But before, we learn the basics of WebRTC technology and its important bits and pieces.
+
+Also, We will make a signaling server with socket.io. This is required to make the initial connection between our peers.
+
+> I am using peer and user interchangeably in this tutorial. Please keep this in mind.
+
+If you follow this tutorial step by step, the final result of our video calling app looks like this.
+
+// add the video
+
+## WebRTC vs WebSocket
+
+WebRTC and Websocket are 2 different technologies. WebRTC is a peer-to-peer connection without any servers involved. While WebSocket is a bidirectional connection between client and server. WebRTC can use WebSocket for its signaling stage during connection negotiation. But WebSocket doesn't need WebRTC. WebSocket connection is established by simply upgrading traditional HTTP connections.
+
+## Basic concepts of a WebRTC connection
+
+To get started with WebRTC, there are 5 main concepts to understand. I am explaining them here one by one briefly. If you think that you need more clarity about the topic, I am linking to the respective MDN pages.
+
+1. **User Media**: You can access the camera and microphone access of the user with the help of the `getUserMedia` browser API. GetUserMedia is natively supported in all the major browsers. If users have multiple cameras or microphone devices, you can let users select which one they prefer. GetUserMedia API also provides video quality customization. You have the flexibility to turn off the video or audio stream as per your need. To know more, visit the [MDN page for getUserMedia API](https://developer.mozilla.org/en-US/docs/Web/API/MediaDevices/getUserMedia).
+2. **RTC peer connection**: RTCPeerConnection is the primary component of any webRTC connection. RTCPeerConnection does all the networking work and connects two remote peers then facilitates video and audio streams between the peers. To know more, visit the [MDN page for RTCPeerConnection](https://developer.mozilla.org/en-US/docs/Web/API/RTCPeerConnection).
+3. **RTC session Description**: RTCSessionDescription contains the configuration of a peer. Session description includes screen resolution, network strength, and all the variables related to webRTC connection which might affect the peer connection. There are multiple session descriptions generated in a webRTC connection and exchanged between peers with the help of signaling servers. When both peers agree on a session description, then negotiation completes and a connection is established between 2 peers. To know more, please check out the [MDN page for RTCSessionDescription](https://developer.mozilla.org/en-US/docs/Web/API/RTCSessionDescription).
+4. **ICE candidates**: To establish a webRTC connection, we need the IP address of our peers. But often peers are hidden behind NAT gateways and it is very hard to get the real IP address of the peers. Therefore we use an external service called STUN servers. STUN servers help us to find the address of a peer and the RTC peer connection generates an ICE candidate out of this. Therefore we can safely say, ICE candidates contain address-related information of peers. Checkout [MDN source on ICE candidate](https://developer.mozilla.org/en-US/docs/Web/API/RTCIceCandidate) for more information.
+5. **Signalling**: To start a WebRTC connection between peers, peers need to negotiate the session description and ICE candidates back and forth. To transfer this information, we need a signaling server. There is no standard or recommended technology for signaling servers. In this tutorial, we are using a socket.IO server as our signaling server.
+
+## Initial setup
+
+In this tutorial, I am using HTML, CSS, and Javascript without any framework. This may help all developers to understand the basic working of webRTC. If you are interested, you can also see my [beginners guide to webRTC in Flutter]() tutorial.
+
+I use vite to generate our vanilla javascript project. To create a new vite project run `npm create vite@latest` command in your terminal. It returns an interactive prompt. Give your project name and select `vanilla-js` option to create the project.
+
+Now the `index.html` file in your project directory should look like this.
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>WebRtc client</title>
+  </head>
+  <body>
+    <script src="https://webrtc.github.io/adapter/adapter-latest.js"></script>
+    <script type="module" src="/main.js"></script>
+  </body>
+</html>
+```
+
+As you can see in the above code block, make sure to add the webRTC adapter script in your HTML file. The adapter script increases the compatibility across browsers.
+
+Now inside the body element, we need 2 video elements. One shows the local video, and another one shows the remote video from the peer.
+
+```html
+<main>
+  <video id="remoteVideo" autoplay></video>
+  <video id="localVideo" autoplay muted></video>
+</main>
+```
+
+In addition to the video element, we also need 2 buttons to connect and disconnect the call.
+
+```html
+<footer>
+  <button id="startBtn">Connect</button>
+  <button id="endBtn">Disconnect</button>
+</footer>
+```
+
+Our markup is now ready. Let's define all those HTML elements in `main.js` file to modify their DOM as per requirement.
+
+```js
+const localVideo = document.getElementById("localVideo");
+const remoteVideo = document.getElementById("remoteVideo");
+const startBtn = document.getElementById("startBtn");
+const endBtn = document.getElementById("endBtn");
+```
+
+## Display user media
+
+To display user media, we use `getUserMedia` function. You can define media constraints (or configurations) as an argument in the `getUserMedia` function.
+
+GetUserMedia function returns a promise. This promise resolves with video and audio stream from the user camera and microphone. You can add this stream directly to the local video element in our HTML markup as a source object.
+
+```js
+navigator.mediaDevices
+  .getUserMedia({
+    video: true,
+    audio: true,
+  })
+  .then((localstream) => {
+    localVideo.srcObject = localstream;
+  });
+```
+
+If you are following up until this point, open your HTML file in the browser and you should see your own video on the browser screen.
+
+## Signalling server
+
+Before going too deep into webRTC, let's talk about signaling in webRTC. To start a webRTC connection, it needs to negotiate the connection information between peers. Therefore, to facilitate this negotiation phase, we need a signaling server.
+
+To make a signaling server, you can use any technology you prefer. But make sure, it is fast and facilitates bidirectional communication between peers.
+
+In this tutorial we are using [socket.io](https://socket.io/) server for signaling our webRTC connection.
+
+Create a Nodejs project by running `npm init -y` command and installing the socket.io dependency.
+
+```bash
+npm i socket.io
+```
+
+Now create a `server.js` file and add the basic code to create and run a socket.io server.
+
+```js
+import { createServer } from "http";
+import { Server } from "socket.io";
+
+const httpserver = createServer();
+
+const io = new Server(httpserver, {
+  cors: {
+    origin: "*",
+  },
+});
+
+io.listen(process.env.PORT || 8000);
+```
+
+Now run the server using `node server.js` command. It will run a socket.io server in your localhost port 8000.
+
+When some clients connected to the server, we send them a welcome message.
+
+```js
+io.on("connection", (socket) => {
+  socket.emit("hello", "Hello from server");
+});
+```
+
+In this signaling server, we listen to three events.
+
+1. **offer**: Offer event carries an RTCPeerConnection offer from the caller to the callee. When callee receives this event, callee responds with an answer event. The offer event contains a session description of the caller.
+2. **answer**: The answer event carries the answer against an offer. This event contains a session description of the callee.
+3. **ice**: The ice event transfers ICE candidates of both caller and callee and helps to establish a stable connection between them.
+
+For each event discussed above, when an event arrives on the server, we directly broadcast the event to all peers connected with the socket except the sender.
+
+```js
+socket.on("offer", (message) => socket.broadcast.emit("offer", message));
+socket.on("answer", (message) => socket.broadcast.emit("answer", message));
+socket.on("ice", (message) => socket.broadcast.emit("ice", message));
+```
+
+## Make an offer to the remote peer using RTCPeerConnection
+
+Each peer connection is handled by the RTCPeerConnection object. We need to provide STUN server configuration to initialize the RTC peer connection object. Otherwise, RTCPeerConnection can't generate the ICE candidate and our connection is never initiated.
+
+For testing, we have many free STUN servers. Here I am using 2 free google STUN servers. Make sure not to use more than 4 stun servers in your RTCPeerConnection configuration.
+
+```
+const configuration = {
+  iceServers: [
+    {
+      urls: ["stun:stun.l.google.com:19302", "stun:stun2.l.google.com:19302"],
+    },
+  ],
+};
+```
+
+Now let's instantiate our RTCPeerConnection object.
+
+```
+const peerconnection = new RTCPeerConnection(configuration);
+```
+
+It is a good idea to add our local media to the RTCPeerConnection as soon as possible. It facilitates the webRTC connection and starts video streaming as soon as possible.
+
+```js
+localstream.getTracks().forEach((track) => {
+  peerconnection.addTrack(track, localstream);
+});
+```
+
+Here we get the `localstream` from the `getUserMedia` function. Take a look at the previous code example of that section.
+
+To make a call to the remote peer, let's make a `makeCall()` function. We run this function when we click on the `startBtn`.
+
+```js
+startBtn.onclick = () => makeCall();
+```
+
+Inside this function, we call the `createOffer()` method of peer connection instance. As we are now creating an offer i.e, making a call, I call myself as a caller. Keep this in mind.
+
+It results in our local `RTCSessionDescription`. This session description includes all our connection-related information that the other remote peer may need to make a successful connection.
+
+Then use `setLocalDescription` method of peerconnection instance to add the generated RTCSessionDescription as our local description.
+
+Then send our local description to the remote peer so that they can set our session description as their remote description. Here we use offer event to send our local description.
+
+```js
+async function makeCall() {
+  const offer = await peerconnection.createOffer();
+  await peerconnection.setLocalDescription(offer);
+  socket.emit("offer", offer);
+}
+```
+
+## Answer to the offer and exchange Session Description (SDP)
+
+Now, when the remote peer received the `offer` event with the session description, it set this description as their remote description. Why? because this is coming from the remote peer.
+
+```js
+socket.on("offer", async (message) => {
+  const remoteDescription = new RTCSessionDescription(message);
+  await peerconnection.setRemoteDescription(remoteDescription);
+});
+```
+
+Now, the remote peer creates their own session description using `createAnswer` method of peerconnection instance. As this side answers the call from the caller, I call them as callee for better explaning the concept.
+
+In short, I am the caller, I am using `createOffer` to call the remote peer. The remote peer is the callee, and they answer my call using `createAnswer` method.
+
+Now, this `createAnswer` method generates a session description. This is the session description of the callee. So they set this description as their local description. Then they send this description to us by emitting `answer` event.
+
+```js
+socket.on("offer", async (message) => {
+  const remoteDescription = new RTCSessionDescription(message);
+  await peerconnection.setRemoteDescription(remoteDescription);
+  const answer = await peerconnection.createAnswer();
+  await peerconnection.setLocalDescription(answer);
+  socket.emit("answer", answer);
+});
+```
+
+Here on the caller side, it listens to the `answer` event, then set the session description coming with the answer from the callee as their remote description.
+
+```js
+socket.on("answer", async (message) => {
+  const remoteDescription = new RTCSessionDescription(message);
+  await peerconnection.setRemoteDescription(remoteDescription);
+});
+```
+
+Thus, the session description negotiation between the caller and callee completes.
+
+## ICE candidates generation negotiation with remote peer
+
+Do you remember we have given the STUN server configuration as an argument when we initialize the RTCPeerConnection object?
+
+The generation of ICE candidates is an automatic process. We can get our ICE candidate by listening to the ICE generation event.
+
+```js
+peerconnection.addEventListener("icecandidate", (e) => {
+  if (e.candidate) {
+    socket.emit("ice", e.candidate);
+  }
+});
+```
+
+When an ICE candidate is generated, we send this to the remote peer or callee, so that they can use our ICE candidate to get our networking details and can establish a connection with us.
+
+> Warning: ICE generation events don't occur until you add the media stream to peerconnection instance. Therefore it is good practice to add media streams to the peerconnection as soon as possible.
+
+When Callee receives our ICE candidate from the `ice` socket event, they add them to their peerconnection.
+
+```js
+socket.on("ice", async (message) => {
+  try {
+    await peerconnection.addIceCandidate(message);
+  } catch (error) {
+    console.log(error);
+  }
+});
+```
+
+Similarly, when we receive the ICE candidate from the remote peer (or callee), we also add that event to our peerconnection instance.
+
+When both the peer gets ICE candidates from each other and set to their peerconnection, an ICE negotiation phase starts. When ICE negotiation completes, video start streaming between the peers.
+
+## Display remote video
+
+To get the remote video using webRTC, we have to listen to `track` event of RTCPeerConnection. When the video arrives, we add this video stream as the source object of the remote video tag in our HTML markup.
+
+```js
+peerconnection.addEventListener("track", async (e) => {
+  const [remoteStream] = e.streams;
+  remoteVideo.srcObject = remoteStream;
+});
+```
+
+Now when the peers are connected with the webRTC connection, they can see the other peer in the webpage.
+
+## Frequently asked questions
+
+### Is webRTC Secure?
+
+WebRTC connection is secure and encrypted by default. But if you are not cautious, data can be leaked into the signaling server. But once the connection is established, webRTC handles the security itself. It is good to know that creating unencrypted WebRTC connections is forbidden by the Internet Engineering Task Force (IETF ) standards.
+
+### Is WebRTC free?
+
+WebRTC is an open-source project supported by many big tech giants. It is free for all to use and integrate into their own free or commercial projects.
+
+### Is WebRTC only for browsers?
+
+No, WebRTC is available on almost all platforms. On Android, it has a java library while on iOS webRTC can be implemented using objective C or swift.
+
+## Conclusion
+
+If you like this tutorial on WebRTC and made your project, then you can host this project on [GitHub pages](https://hrishikeshpathak.com/blog/svelte-gh-pages) or [Cloudflare pages](https://hrishikeshpathak.com/blog/deploy-nextjs-cloudflare-pages) very easily. If you have anything to say, you can find me on Twitter as [@hrishikshpathak](https://twitter.com/hrishikshpathak).
